@@ -24,7 +24,7 @@ class NameLoadTest {
     void whenParsingArgumentDoesNotContainSymbol() {
         NameLoad nameLoad = new NameLoad();
         String illegalArgument = "key2:value2";
-        assertThatThrownBy(()->nameLoad.parse("key1=value1", illegalArgument, "key3=value3"))
+        assertThatThrownBy(() -> nameLoad.parse("key1=value1", illegalArgument, "key3=value3"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(illegalArgument)
                 .hasMessageContaining("does not contain the symbol");
@@ -34,7 +34,7 @@ class NameLoadTest {
     void whenParsingArgumentDoesNotContainKey() {
         NameLoad nameLoad = new NameLoad();
         String illegalArgument = "=value2";
-        assertThatThrownBy(()->nameLoad.parse("key1=value1", illegalArgument, "key3=value3"))
+        assertThatThrownBy(() -> nameLoad.parse("key1=value1", illegalArgument, "key3=value3"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(illegalArgument)
                 .hasMessageContaining("does not contain a key");
@@ -44,7 +44,7 @@ class NameLoadTest {
     void whenParsingArgumentDoesNotContainValue() {
         NameLoad nameLoad = new NameLoad();
         String illegalArgument = "key2=";
-        assertThatThrownBy(()->nameLoad.parse("key1=value1", illegalArgument, "key3=value3"))
+        assertThatThrownBy(() -> nameLoad.parse("key1=value1", illegalArgument, "key3=value3"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .message()
                 .contains(illegalArgument)
