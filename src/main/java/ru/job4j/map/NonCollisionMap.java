@@ -20,7 +20,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     @Override
     public boolean put(K key, V value) {
         boolean rsl = false;
-        if (Float.compare((float) count / capacity, LOAD_FACTOR) >= 0) {
+        if (Float.compare(count / capacity, LOAD_FACTOR) >= 0) {
             expand();
         }
         int index = indexFromKey(key);
