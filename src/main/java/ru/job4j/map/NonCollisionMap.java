@@ -20,7 +20,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     @Override
     public boolean put(K key, V value) {
         boolean rsl = false;
-        if (Float.compare(count / capacity, LOAD_FACTOR) >= 0) {
+        if (count >= LOAD_FACTOR * capacity) {
             expand();
         }
         int index = indexFromKey(key);
@@ -122,10 +122,4 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         }
     }
 
-    public static void main(String[] args) {
-        NonCollisionMap<Integer, String> map = new NonCollisionMap<>();
-        for (int i = 0; i < 100; i++) {
-            System.out.println("i = " + i + "; hash = " + map.indexFor(i));
-        }
-    }
 }
