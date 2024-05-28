@@ -27,8 +27,12 @@ public class Config {
                         }
                         String key = s.substring(0, index);
                         String value = s.substring(index + 1);
-                        if (key.isEmpty() || value.isEmpty()) {
-                            throw new IllegalArgumentException("empty key or value");
+                        if (key.isEmpty() & value.isEmpty()) {
+                            throw new IllegalArgumentException("empty key and value in line");
+                        } else if (key.isEmpty()) {
+                            throw new IllegalArgumentException("empty key in line");
+                        } else if (value.isEmpty()) {
+                            throw new IllegalArgumentException("empty value in line");
                         }
                         values.put(key, value);
                     });

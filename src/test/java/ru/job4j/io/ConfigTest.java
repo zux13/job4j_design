@@ -37,6 +37,30 @@ class ConfigTest {
         String path = "./data/wrong_format.properties";
         Config config = new Config(path);
         Throwable thrown = assertThrows(IllegalArgumentException.class, config::load);
-        assertThat(thrown.getMessage()).contains("empty key or value");
+        assertThat(thrown.getMessage()).contains("no '=' in line");
+    }
+
+    @Test
+    void whenEmptyKeyInLine() {
+        String path = "./data/empty_key.properties";
+        Config config = new Config(path);
+        Throwable thrown = assertThrows(IllegalArgumentException.class, config::load);
+        assertThat(thrown.getMessage()).contains("empty key in line");
+    }
+
+    @Test
+    void whenEmptyValueInLine() {
+        String path = "./data/empty_value.properties";
+        Config config = new Config(path);
+        Throwable thrown = assertThrows(IllegalArgumentException.class, config::load);
+        assertThat(thrown.getMessage()).contains("empty value in line");
+    }
+
+    @Test
+    void whenEmptyKeyAndValueInLine() {
+        String path = "./data/empty_key_and_value.properties";
+        Config config = new Config(path);
+        Throwable thrown = assertThrows(IllegalArgumentException.class, config::load);
+        assertThat(thrown.getMessage()).contains("empty key and value in line");
     }
 }
