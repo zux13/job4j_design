@@ -1,34 +1,47 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.List;
 
 public class Analysis {
+
+    public boolean isAvailable;
+
+    {
+        isAvailable = true;
+    }
 
     public void unavailable(String source, String target) {
         try (BufferedReader reader = new BufferedReader(new FileReader(source));
         BufferedWriter writer = new BufferedWriter(new FileWriter(target))) {
-            List<String> lines = reader.lines().toList();
-            boolean isAvailable = true;
-            for (String line : lines) {
-                if (lineWithErrorStatus(line) && isAvailable) {
-                    writer.write(line, 4, line.length() - 4);
-                    writer.write(";");
-                    isAvailable = false;
-                } else if (!lineWithErrorStatus(line) && !isAvailable) {
-                    writer.write(line, 4, line.length() - 4);
-                    writer.write(";");
-                    writer.newLine();
-                    isAvailable = true;
-                }
-            }
+            reader.lines()
+                    .filter(s -> isStartOfIdle(s) || isEndOfIdle(s))
+                    .map(s -> s.substring(4) + ";" + (!isAvailable ? "" : System.lineSeparator()))
+                    .forEach(s -> {
+                        try {
+                            writer.write(s);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public boolean lineWithErrorStatus(String line) {
-        return line.startsWith("400") || line.startsWith("500");
+    public boolean isStartOfIdle(String line) {
+        boolean rsl = isAvailable && (line.startsWith("400") || line.startsWith("500"));
+        if (rsl) {
+            isAvailable = false;
+        }
+        return rsl;
+    }
+
+    public boolean isEndOfIdle(String line) {
+        boolean rsl = !isAvailable && (line.startsWith("200") || line.startsWith("300"));
+        if (rsl) {
+            isAvailable = true;
+        }
+        return rsl;
     }
 
     public static void main(String[] args) {
