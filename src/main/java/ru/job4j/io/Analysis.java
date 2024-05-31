@@ -17,11 +17,16 @@ public class Analysis {
                 String status = parts[0];
                 String time = parts[1];
 
-                if ((status.equals("400") || status.equals("500")) && !serverDown) {
+                if (("400".equals(status) || "500".equals(status)) && !serverDown) {
                     start = time;
                     serverDown = true;
-                } else if ((status.equals("200") || status.equals("300")) && serverDown) {
-                    writer.println(start + ";" + time + ";");
+                } else if (("200".equals(status) || "300".equals(status)) && serverDown) {
+                    StringBuilder output = new StringBuilder();
+                    output.append(start)
+                            .append(";")
+                            .append(time)
+                            .append(";");
+                    writer.println(output);
                     serverDown = false;
                 }
                 line = reader.readLine();
