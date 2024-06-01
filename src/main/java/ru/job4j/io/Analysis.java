@@ -21,12 +21,11 @@ public class Analysis {
                     start = time;
                     serverDown = true;
                 } else if (("200".equals(status) || "300".equals(status)) && serverDown) {
-                    StringBuilder output = new StringBuilder();
-                    output.append(start)
+                    writer.append(start)
                             .append(";")
                             .append(time)
-                            .append(";");
-                    writer.println(output);
+                            .append(";")
+                            .append(System.lineSeparator());
                     serverDown = false;
                 }
                 line = reader.readLine();
