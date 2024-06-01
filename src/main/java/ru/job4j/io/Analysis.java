@@ -13,17 +13,14 @@ public class Analysis {
             boolean serverDown = false;
 
             while (line != null) {
-                String[] parts = line.split(" ");
-                String status = parts[0];
-                String time = parts[1];
 
-                if (("400".equals(status) || "500".equals(status)) && !serverDown) {
-                    start = time;
+                if ((line.startsWith("400") || line.startsWith("500")) && !serverDown) {
+                    start = line.substring(line.indexOf(" ") + 1);
                     serverDown = true;
-                } else if (("200".equals(status) || "300".equals(status)) && serverDown) {
+                } else if ((line.startsWith("200") || line.startsWith("300")) && serverDown) {
                     writer.append(start)
                             .append(";")
-                            .append(time)
+                            .append(line.substring(line.indexOf(" ") + 1))
                             .append(";")
                             .append(System.lineSeparator());
                     serverDown = false;
