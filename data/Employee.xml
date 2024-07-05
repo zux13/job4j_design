@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Employee isFullTime="true" salary="200000.0" firstName="John">
+    <department departmentName="IT" location="Moscow"/>
+    <projectIds>
+        <projectId>404</projectId>
+        <projectId>500</projectId>
+    </projectIds>
+</Employee>
