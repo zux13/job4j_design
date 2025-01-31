@@ -6,6 +6,6 @@ public class Warehouse extends AbstractStore {
     @Override
     public boolean canAccept(Food food) {
         double percentLeft = calculatePercentLeft(food);
-        return percentLeft >= 0.75;
+        return percentLeft >= WAREHOUSE_THRESHOLD;
     }
 }

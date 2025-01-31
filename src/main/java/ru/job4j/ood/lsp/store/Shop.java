@@ -6,12 +6,12 @@ public class Shop extends AbstractStore {
     @Override
     public boolean canAccept(Food food) {
         double percentLeft = calculatePercentLeft(food);
-        return percentLeft >= 0 && percentLeft < 0.75;
+        return percentLeft >= TRASH_THRESHOLD && percentLeft < SHOP_ACCEPT_THRESHOLD;
     }
 
     @Override
     public void applyDiscount(Food food) {
-        if (calculatePercentLeft(food) < 0.25) {
+        if (calculatePercentLeft(food) < SHOP_DISCOUNT_THRESHOLD) {
             food.setPrice(food.getPrice() * 0.8);
             food.setDiscount(20);
         }

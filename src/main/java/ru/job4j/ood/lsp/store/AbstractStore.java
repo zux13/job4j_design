@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractStore implements Store {
+
+    protected static final double WAREHOUSE_THRESHOLD = 0.75;
+    protected static final double SHOP_ACCEPT_THRESHOLD = 0.75;
+    protected static final double SHOP_DISCOUNT_THRESHOLD = 0.25;
+    protected static final double TRASH_THRESHOLD = 0;
     private final List<Food> foods;
 
     public AbstractStore() {

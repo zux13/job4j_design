@@ -6,6 +6,6 @@ public class Trash extends AbstractStore {
     @Override
     public boolean canAccept(Food food) {
         double percentLeft = calculatePercentLeft(food);
-        return percentLeft < 0;
+        return percentLeft < TRASH_THRESHOLD;
     }
 }
