@@ -1,7 +1,6 @@
 package ru.job4j.ood.isp.parking;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.isp.vehicle.Car;
 import ru.job4j.ood.isp.vehicle.Truck;
@@ -11,7 +10,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Disabled
 public class ConcreteParkingLotTest {
 
     private static final int CAR_PLACES = 10;
