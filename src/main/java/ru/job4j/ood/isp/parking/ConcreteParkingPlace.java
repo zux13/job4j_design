@@ -8,16 +8,24 @@ public class ConcreteParkingPlace implements ParkingPlace {
 
     @Override
     public boolean isAvailable() {
-        return false;
+        return occupiedBy == null;
+    }
+
+    @Override
+    public boolean isOccupiedBy(Vehicle vehicle) {
+        return occupiedBy == vehicle;
     }
 
     @Override
     public void occupy(Vehicle vehicle) {
-
+        if (occupiedBy != null) {
+            throw new IllegalStateException("This place is already occupied");
+        }
+        this.occupiedBy = vehicle;
     }
 
     @Override
     public void release() {
-
+        this.occupiedBy = null;
     }
 }

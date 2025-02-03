@@ -1,14 +1,13 @@
 package ru.job4j.ood.isp.parking;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.isp.vehicle.Car;
+import ru.job4j.ood.isp.vehicle.Truck;
 import ru.job4j.ood.isp.vehicle.Vehicle;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Disabled
 public class ConcreteParkingPlaceTest {
 
     private ConcreteParkingPlace parkingPlace;
@@ -49,5 +48,18 @@ public class ConcreteParkingPlaceTest {
     public void testReleaseWhenNotOccupiedDoesNothing() {
         parkingPlace.release();
         assertTrue(parkingPlace.isAvailable());
+    }
+
+    @Test
+    public void testWhenIsOccupiedByCarIsTrue() {
+        Vehicle car = new Car();
+        parkingPlace.occupy(car);
+        assertTrue(parkingPlace.isOccupiedBy(car));
+    }
+
+    @Test
+    public void testWhenIsOccupiedByCarIsFalse() {
+        parkingPlace.occupy(new Car());
+        assertFalse(parkingPlace.isOccupiedBy(new Truck(3)));
     }
 }
