@@ -4,8 +4,8 @@ import ru.job4j.ood.lsp.food.Food;
 import ru.job4j.ood.lsp.store.Store;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class ControlQuality {
     private final List<Store> stores;
@@ -32,12 +32,10 @@ public class ControlQuality {
     public void resort() {
         List<Food> foods = new ArrayList<>();
         for (Store store : stores) {
-            List<Food> storeFoods = store.getFoods();
-            Iterator<Food> iterator = storeFoods.iterator();
-            while (iterator.hasNext()) {
-                Food food = iterator.next();
-                foods.add(food);
-                iterator.remove();
+            ListIterator<Food> listIterator = store.getFoods().listIterator();
+            while (listIterator.hasNext()) {
+                foods.add(listIterator.next());
+                listIterator.remove();
             }
         }
         control(foods);
