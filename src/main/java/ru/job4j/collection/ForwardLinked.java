@@ -51,7 +51,13 @@ public class ForwardLinked<T> implements Iterable<T> {
         head.item = null;
         head.next = null;
         head = nextNode;
+        size--;
+        modCount++;
         return rsl;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     @Override
