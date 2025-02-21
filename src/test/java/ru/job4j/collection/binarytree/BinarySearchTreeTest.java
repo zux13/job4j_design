@@ -186,4 +186,56 @@ class BinarySearchTreeTest {
         assertThat(tree.inSymmetricalOrder()).hasSize(1)
                 .containsExactly(2);
     }
+
+    @Test
+    void whenClearTreeThenItBecomesEmpty() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        for (int element : new int[]{4, 2, 6, 1, 3, 5, 7}) {
+            tree.put(element);
+        }
+        tree.clear();
+        assertThat(tree.inSymmetricalOrder()).isEmpty();
+    }
+
+    @Test
+    void whenClearSingleElementTreeThenItBecomesEmpty() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(4);
+        tree.clear();
+        assertThat(tree.inSymmetricalOrder()).isEmpty();
+    }
+
+    @Test
+    void whenClearEmptyTreeThenItRemainsEmpty() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.clear();
+        assertThat(tree.inSymmetricalOrder()).isEmpty();
+    }
+
+    @Test
+    void whenClearTreeAndCheckContainsThenReturnsFalse() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        for (int element : new int[]{4, 2, 6, 1, 3, 5, 7}) {
+            tree.put(element);
+        }
+        tree.clear();
+        assertThat(tree.contains(4)).isFalse();
+        assertThat(tree.contains(2)).isFalse();
+        assertThat(tree.contains(6)).isFalse();
+        assertThat(tree.contains(1)).isFalse();
+        assertThat(tree.contains(3)).isFalse();
+        assertThat(tree.contains(5)).isFalse();
+        assertThat(tree.contains(7)).isFalse();
+    }
+
+    @Test
+    void whenClearTreeAndCheckMinAndMaxThenReturnsNull() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        for (int element : new int[]{4, 2, 6, 1, 3, 5, 7}) {
+            tree.put(element);
+        }
+        tree.clear();
+        assertThat(tree.minimum()).isNull();
+        assertThat(tree.maximum()).isNull();
+    }
 }
