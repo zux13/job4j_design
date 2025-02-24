@@ -45,7 +45,7 @@ class AvlTreeTest {
     void whenInsertDuplicateThenFalse() {
         AvlTree<Integer> tree = new AvlTree<>();
         assertTrue(tree.insert(30));
-        assertFalse(tree.insert(30)); // Дубликат
+        assertFalse(tree.insert(30));
     }
 
     @Test
@@ -63,7 +63,7 @@ class AvlTreeTest {
         assertTrue(tree.remove(10));
         assertFalse(tree.contains(10));
 
-        assertFalse(tree.remove(100)); // Элемента нет
+        assertFalse(tree.remove(100));
     }
 
     @Test
